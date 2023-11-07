@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.denispotapov.beerrecipes'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.denispotapov.beerrecipes"
         minSdk 26
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -48,14 +48,54 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.5.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
     implementation platform('androidx.compose:compose-bom:2022.10.00')
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-graphics'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
+
+
+    def ver_compose = "1.5.4"
+
+    // Core
+    implementation "androidx.compose.ui:ui:$ver_compose"
+    // Graphics
+    implementation "androidx.compose.ui:ui-graphics:$ver_compose"
+    // Tooling
+    implementation "androidx.compose.ui:ui-tooling-preview:$ver_compose"
+    implementation "androidx.compose.ui:ui-tooling:$ver_compose"
+    // Material
+    implementation "androidx.compose.material:material:$ver_compose"
+    implementation "androidx.compose.material:material-icons-core:$ver_compose"
+    implementation "androidx.compose.material:material-icons-extended:$ver_compose"
+    implementation "androidx.compose.material:material-ripple:$ver_compose"
+    // Animation
+    implementation "androidx.compose.animation:animation:$ver_compose"
+    implementation "androidx.compose.animation:animation-core:$ver_compose"
+    // Runtime
+    implementation "androidx.compose.runtime:runtime:$ver_compose"
+    implementation "androidx.compose.runtime:runtime-livedata:$ver_compose"
+    // Foundation
+    implementation "androidx.compose.foundation:foundation:$ver_compose"
+    implementation "androidx.compose.foundation:foundation-layout:$ver_compose"
+    // Activity
+    implementation "androidx.activity:activity-compose:1.8.0"
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.2"
+    // ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+    // Navigation
+    implementation "androidx.navigation:navigation-compose:2.7.5"
+
+    // Koil
+    def ver_coil = "2.3.0"
+    implementation "io.coil-kt:coil-compose:$ver_coil"
+    implementation "io.coil-kt:coil-gif:$ver_coil"
+    implementation "io.coil-kt:coil-svg:$ver_coil"
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
