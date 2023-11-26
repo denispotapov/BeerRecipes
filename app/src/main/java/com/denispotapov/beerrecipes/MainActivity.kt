@@ -104,14 +104,14 @@ fun TestView(bottomSheetExpandedState: MutableState<Boolean>) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CreateRecipeBottomSheet(bottomSheetState: State<Boolean>) {
+fun CreateRecipeBottomSheet(bottomSheetState: MutableState<Boolean>) {
 
     val scope = rememberCoroutineScope()
 
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         confirmValueChange = {
-            false
+            true
         },
         skipHalfExpanded = true
     )
@@ -135,6 +135,7 @@ fun CreateRecipeBottomSheet(bottomSheetState: State<Boolean>) {
             BackHandler(enabled = sheetState.isVisible) {
                 scope.launch {
                     sheetState.hide()
+                    bottomSheetState.value = false
                 }
             }
             Text(
