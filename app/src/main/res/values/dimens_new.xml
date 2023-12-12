@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <dimen name="text_size_large">34sp</dimen>
     <dimen name="text_size_title1">28sp</dimen>
     <dimen name="text_size_title2">22sp</dimen>
@@ -24,7 +23,6 @@
     <dimen name="text_size_caption1_height">16sp</dimen>
     <dimen name="text_size_caption2_height">13sp</dimen>
 
-
     <!-- Line spacing height - size-->
     <dimen name="text_size_large_line_spacing">1sp</dimen>
     <dimen name="text_size_title1_line_spacing">1sp</dimen>
@@ -36,16 +34,4 @@
     <dimen name="text_size_footnote_line_spacing">3sp</dimen>
     <dimen name="text_size_caption1_line_spacing">2sp</dimen>
     <dimen name="text_size_caption2_line_spacing">0sp</dimen>
-
-
-    <dimen name="progress_search_height">1dp</dimen>
-
-
-    <!--   items  -->
-    <dimen name="item_min_height">72dp</dimen>
-    <dimen name="avatar_big_size">100dp</dimen>
-    <dimen name="avatar_medium_size">56dp</dimen>
-    <dimen name="avatar_small_size">36dp</dimen>
-    <dimen name="avatar_extra_small_size">24dp</dimen>
-
 </resources>

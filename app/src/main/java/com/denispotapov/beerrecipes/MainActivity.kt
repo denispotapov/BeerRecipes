@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.denispotapov.beerrecipes.data.models.Recipe
-import com.denispotapov.beerrecipes.ui.CreateRecipeBottomSheet
+import com.denispotapov.beerrecipes.ui.bottomsheet.CreateRecipeBottomSheet
 import com.denispotapov.beerrecipes.ui.theme.BeerRecipesTheme
 
 class MainActivity : ComponentActivity() {
