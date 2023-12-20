@@ -2,8 +2,10 @@
     <string name="app_name">Beer Recipes</string>
     <string name="recipe_create">Создать рецепт</string>
     <string name="recipe_ingredients">Ингредиенты</string>
-    <string name="recipe_ingredients_grain">ЗЕРНОВЫЕ</string>
-    <string name="recipe_ingredients_hope">ХМЕЛЬ</string>
+    <string name="recipe_ingredients_grain">Зерновые</string>
+    <string name="recipe_ingredients_hope">Хмель</string>
+    <string name="recipe_ingredients_yeast">Дрожжи</string>
     <string name="recipe_malt">Солод</string>
     <string name="recipe_add_malt">Добавить солод</string>
+    <string name="recipe_add_hop">Добавить хмель</string>
 </resources>

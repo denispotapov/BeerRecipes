@@ -34,7 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.denispotapov.beerrecipes.R
-import com.denispotapov.beerrecipes.data.models.Malt
+import com.denispotapov.beerrecipes.data.models.Ingredient
 import com.denispotapov.beerrecipes.ui.compose_ui.styles.TextBodyMedium
 import com.denispotapov.beerrecipes.ui.compose_ui.styles.TextFootnoteRegular
 import kotlinx.coroutines.launch
@@ -47,7 +47,15 @@ fun CreateRecipeBottomSheet(bottomSheetState: MutableState<Boolean>) {
     val lazyColumnState = rememberLazyListState()
 
     val listMalts = remember {
-        listOf(Malt(mutableStateOf(""))).toMutableStateList()
+        listOf(Ingredient.Malt(mutableStateOf(""))).toMutableStateList()
+    }
+
+    val listHops = remember {
+        listOf(Ingredient.Hop(mutableStateOf(""))).toMutableStateList()
+    }
+
+    val listYeast = remember {
+        listOf(Ingredient.Yeast(mutableStateOf(""))).toMutableStateList()
     }
 
     val sheetState = rememberModalBottomSheetState(
@@ -87,14 +95,14 @@ fun CreateRecipeBottomSheet(bottomSheetState: MutableState<Boolean>) {
                 modifier = Modifier
                     .wrapContentHeight()
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 30.dp)
+                    .padding(start = 16.dp, end = 16.dp, top = 20.dp)
                     // .background(colorResource(R.color.materials_navigation_bar))
                     .pointerInput(Unit) {
                         /*detectDragGestures { _, _ ->
                             onDragBottomSheetCallback.invoke()
                         }*/
                     },
-                    //.dragContainer(dragDropState),
+                //.dragContainer(dragDropState),
                 state = lazyColumnState
             ) {
 
@@ -105,14 +113,7 @@ fun CreateRecipeBottomSheet(bottomSheetState: MutableState<Boolean>) {
                     )
                 }
 
-                item {
-                    Divider(
-                        Modifier
-                            .padding(vertical = 16.dp),
-                        color = colorResource(id = R.color.separator),
-                        thickness = 0.5.dp
-                    )
-                }
+                addDivider()
 
                 item {
                     Text(
@@ -124,36 +125,42 @@ fun CreateRecipeBottomSheet(bottomSheetState: MutableState<Boolean>) {
                 items(
                     items = listMalts
                 ) {
-                    TextFieldItem(it, listMalts)
+                    TextFieldItem(it, listMalts, R.string.recipe_malt)
                 }
 
-                addIngredient(R.string.recipe_add_malt, listMalts)
+                addIngredient(R.string.recipe_add_malt, listMalts, Ingredient.Malt(mutableStateOf("")))
 
+
+                addDivider()
 
                 item {
-                    Divider(
-                        Modifier
-                            .padding(vertical = 16.dp),
-                        color = colorResource(id = R.color.separator),
-                        thickness = 0.5.dp
+                    Text(
+                        text = stringResource(id = R.string.recipe_ingredients_hope),
+                        style = TextFootnoteRegular(color = R.color.grey)
                     )
                 }
 
-               item {
-                   Text(
-                       text = stringResource(id = R.string.recipe_ingredients_hope),
-                       style = TextFootnoteRegular(color = R.color.grey)
-                   )
-               }
+                items(
+                    items = listHops
+                ) {
+                    TextFieldItem(it, listHops, R.string.recipe_ingredients_hope)
+                }
 
+                addIngredient(R.string.recipe_add_hop, listHops, Ingredient.Hop(mutableStateOf("")))
+
+                addDivider()
 
                 item {
-                    Divider(
-                        Modifier
-                            .padding(vertical = 16.dp),
-                        color = colorResource(id = R.color.separator),
-                        thickness = 0.5.dp
+                    Text(
+                        text = stringResource(id = R.string.recipe_ingredients_yeast),
+                        style = TextFootnoteRegular(color = R.color.grey)
                     )
+                }
+
+                items(
+                    items = listYeast
+                ) {
+                    TextFieldItem(it, listYeast, R.string.recipe_ingredients_yeast)
                 }
 
             }
@@ -165,25 +172,71 @@ fun CreateRecipeBottomSheet(bottomSheetState: MutableState<Boolean>) {
 
 }
 
-fun LazyListScope.addIngredient(string: Int, listMalts: SnapshotStateList<Malt>) {
+fun LazyListScope.addDivider() {
+    item {
+        Divider(
+            Modifier
+                .padding(vertical = 16.dp),
+            color = colorResource(id = R.color.separator),
+            thickness = 0.5.dp
+        )
+    }
+}
+
+fun <T> LazyListScope.addIngredient(
+    stringResource: Int,
+    listIngredient: SnapshotStateList<T>,
+    model: T
+) {
 
     item {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                /*.pointerInput(Unit) {
+                .padding(top = 16.dp)
+                .clickable { listIngredient.add(model) }
+
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_plus_circle_24_fill_accent),
+                tint = colorResource(id = R.color.green),
+                contentDescription = null
+            )
+            Text(
+                modifier = Modifier.padding(start = 4.dp),
+                text = stringResource(id = stringResource),
+                color = colorResource(id = R.color.green)
+            )
+        }
+    }
+}
+
+/*fun LazyListScope.addIngredient(string: Int, listIngredient: SnapshotStateList<*>) {
+
+    // listIngredient.
+
+    val ingredientMalt = Ingredient.Malt(mutableStateOf(""))
+    val ingredient = Ingredient.Hop(mutableStateOf(""))
+
+    item {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                *//*.pointerInput(Unit) {
                     detectDragGestures { _, _ ->
                         onDragBottomSheetCallback.invoke()
                     }
-                }*/
+                }*//*
+
                 .padding(top = 16.dp)
                 .clickable {
-                    listMalts.add(Malt(mutableStateOf("")))
-                    /*coroutineScope.launch {
+                    listIngredient.add(ingredientMalt)
+                    *//*coroutineScope.launch {
                         listState.animateScrollToItem(listState.layoutInfo.totalItemsCount - 1)
                         //TODO исправить кейс, когда фокус стоит на предыдущих полях
                         focusManager.moveFocus(FocusDirection.Next)
-                    }*/
+                    }*//*
+
                 }
 
         ) {
@@ -199,4 +252,4 @@ fun LazyListScope.addIngredient(string: Int, listMalts: SnapshotStateList<Malt>)
             )
         }
     }
-}
+}*/

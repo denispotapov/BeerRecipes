@@ -31,8 +31,8 @@ fun <T> BottomSheetHeader(
     Row(
         modifier = Modifier
             .padding(
-                top = 16.dp,
-                bottom = 8.dp
+                vertical = 16.dp,
+                horizontal = 16.dp
             )
             .wrapContentHeight()
             .fillMaxWidth(),

@@ -11,6 +11,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,32 +21,36 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.denispotapov.beerrecipes.R
+import com.denispotapov.beerrecipes.data.models.Ingredient
 import com.denispotapov.beerrecipes.data.models.Malt
 import com.denispotapov.beerrecipes.ui.compose_ui.styles.TextBodyMedium
 import com.denispotapov.beerrecipes.ui.compose_ui.textfield.CustomTextField
 
 @Composable
-fun <T> TextFieldItem(model: T, list: SnapshotStateList<T>) {
+fun TextFieldItem(ingredient: Ingredient, listIngredient: SnapshotStateList<*>, stringResource: Int) {
 
-    val malt = model as Malt
-    val listMalt = list as SnapshotStateList<*>
+    val name = when (ingredient) {
+        is Ingredient.Malt -> ingredient.name
+        is Ingredient.Hop -> ingredient.name
+        is Ingredient.Yeast -> ingredient.name
+    }
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(max = 120.dp)
-            .padding(bottom = 8.dp),
+            .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
 
-        val isListDefault = listMalt.size == 1
+        val isListDefault = listIngredient.size == 1
 
         if (!isListDefault) {
             Icon(
                 modifier = Modifier
                     .padding(end = 8.dp)
                     .clickable {
-                        listMalt.remove(malt)
+                        listIngredient.remove(ingredient)
                     },
                 painter = painterResource(id = R.drawable.ic_minus_circle_24_fill_error),
                 tint = colorResource(id = R.color.error),
@@ -62,11 +67,11 @@ fun <T> TextFieldItem(model: T, list: SnapshotStateList<T>) {
                         onTextFieldClicked.invoke()
                     }
                 }*/
-            value = malt.name.value,
-            onValueChange = { malt.name.value = it },
+            value = name.value,
+            onValueChange = { name.value = it },
             placeholder = {
                 Text(
-                    text = stringResource(id = R.string.recipe_malt),
+                    text = stringResource(id = stringResource),
                     style = TextBodyMedium(R.color.tertiary)
                 )
             },
