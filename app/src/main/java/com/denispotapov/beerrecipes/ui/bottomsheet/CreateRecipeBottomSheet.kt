@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
@@ -77,7 +78,8 @@ fun CreateRecipeBottomSheet(bottomSheetState: MutableState<Boolean>) {
     ModalBottomSheetLayout(
         modifier = Modifier
             .fillMaxHeight()
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .imePadding(),
         //    .background(colorResource(id = R.color.background_card)),
         sheetState = sheetState,
         sheetGesturesEnabled = false,
@@ -106,6 +108,7 @@ fun CreateRecipeBottomSheet(bottomSheetState: MutableState<Boolean>) {
                 state = lazyColumnState
             ) {
 
+
                 item {
                     Text(
                         text = stringResource(id = R.string.recipe_ingredients),
@@ -115,53 +118,43 @@ fun CreateRecipeBottomSheet(bottomSheetState: MutableState<Boolean>) {
 
                 addDivider()
 
-                item {
-                    Text(
-                        text = stringResource(id = R.string.recipe_ingredients_grain),
-                        style = TextFootnoteRegular(color = R.color.grey)
-                    )
-                }
+                addIngredientType(R.string.recipe_ingredients_grain)
 
-                items(
+                addLazyColumn(listMalts, R.string.recipe_malt)
+
+               /* items(
                     items = listMalts
                 ) {
                     TextFieldItem(it, listMalts, R.string.recipe_malt)
-                }
+                }*/
 
                 addIngredient(R.string.recipe_add_malt, listMalts, Ingredient.Malt(mutableStateOf("")))
 
-
                 addDivider()
 
-                item {
-                    Text(
-                        text = stringResource(id = R.string.recipe_ingredients_hope),
-                        style = TextFootnoteRegular(color = R.color.grey)
-                    )
-                }
+                addIngredientType(R.string.recipe_ingredients_hope)
 
-                items(
+                addLazyColumn(listHops, R.string.recipe_ingredients_hope)
+
+                /*items(
                     items = listHops
                 ) {
                     TextFieldItem(it, listHops, R.string.recipe_ingredients_hope)
-                }
+                }*/
 
                 addIngredient(R.string.recipe_add_hop, listHops, Ingredient.Hop(mutableStateOf("")))
 
                 addDivider()
 
-                item {
-                    Text(
-                        text = stringResource(id = R.string.recipe_ingredients_yeast),
-                        style = TextFootnoteRegular(color = R.color.grey)
-                    )
-                }
+                addIngredientType(R.string.recipe_ingredients_yeast)
 
-                items(
+                addLazyColumn(listYeast, R.string.recipe_ingredients_yeast)
+
+               /* items(
                     items = listYeast
                 ) {
                     TextFieldItem(it, listYeast, R.string.recipe_ingredients_yeast)
-                }
+                }*/
 
             }
 
@@ -180,6 +173,23 @@ fun LazyListScope.addDivider() {
             color = colorResource(id = R.color.separator),
             thickness = 0.5.dp
         )
+    }
+}
+
+fun LazyListScope.addIngredientType(stringResource: Int) {
+    item {
+        Text(
+            text = stringResource(id = stringResource),
+            style = TextFootnoteRegular(color = R.color.grey)
+        )
+    }
+}
+
+fun <T> LazyListScope.addLazyColumn(listIngredients: SnapshotStateList<T>, stringResource: Int) {
+    items(
+        items = listIngredients
+    ) {
+        TextFieldItem(it, listIngredients, stringResource)
     }
 }
 
