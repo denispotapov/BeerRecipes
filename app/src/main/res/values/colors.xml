@@ -16,5 +16,9 @@
     <color name="green">#057E1D</color>
     <color name="separator">#4A494949</color>
     <color name="grey">#85272727</color>
+    <color name="error">#FF3B30</color>
+    <color name="tertiary">#85272727</color>
+    <color name="quaternary">#2E747480</color>
+    <color name="greys_grey">#A5AAB1</color>
 
 </resources>

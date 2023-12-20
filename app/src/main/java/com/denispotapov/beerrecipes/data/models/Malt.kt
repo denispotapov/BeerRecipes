@@ -1,3 +1,5 @@
 package com.denispotapov.beerrecipes.data.models
 
-data class Malt(val name: String, val weight: Int)
+import androidx.compose.runtime.MutableState
+
+data class Malt(val name: MutableState<String>, val weight: Int = 0)

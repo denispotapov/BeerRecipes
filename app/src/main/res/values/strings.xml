@@ -4,4 +4,6 @@
     <string name="recipe_ingredients">Ингредиенты</string>
     <string name="recipe_ingredients_grain">ЗЕРНОВЫЕ</string>
     <string name="recipe_ingredients_hope">ХМЕЛЬ</string>
+    <string name="recipe_malt">Солод</string>
+    <string name="recipe_add_malt">Добавить солод</string>
 </resources>
